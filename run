@@ -1,0 +1,3 @@
+python3.6 Sampling/SamplingDataset.py business_transactions.edges `python3.6 Sampling/ChernoffBounds.py 27604 4 0.95 0.15` sampled SRW
+
+java -Xmx6G -cp Regularization/Transductive_Classifier.jar algoritmos.GNetMineSampling params.json
