@@ -1,3 +1,11 @@
-python3.6 Sampling/SamplingDataset.py business_transactions.edges `python3.6 Sampling/ChernoffBounds.py 27604 4 0.95 0.15` sampled SRW
+pip3.6 install --user -e Sampling/Graph_Sampling/
+
+# Run with sample size set using Chernoff Bounds
+#python3.6 Sampling/SamplingDataset.py network.edges labels.labeled_events output_dir method
+
+# Run with manually defined sample size
+#python3.6 Sampling/SamplingDataset.py network.edges labels.labeled_events output_dir method sample_size
+
+python3.6 Sampling/SamplingDataset.py business_transactions.edges business_transactions.labeled_events sampled SRW
 
 java -Xmx6G -cp Regularization/Transductive_Classifier.jar algoritmos.GNetMineSampling params.json
