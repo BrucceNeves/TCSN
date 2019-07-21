@@ -1,13 +1,18 @@
+mkdir -p ../models/business_transactions
+mkdir ../sampled_business_transactions
+
+wget https://www.websensors.net.br/techn/files/tcsn-datasets.zip -O ../tcsn-datasets.zip
+
+unzip ../tcsn-datasets.zip -d ../
+
+wget https://www.websensors.net.br/techn/files/tcsn-labels.zip -O ../tcsn-labels.zip
+
+unzip ../tcsn-labels.zip -d ../
+
 pip3.6 install --user -e Sampling/Graph_Sampling/
-
-# Run with sample size set using Chernoff Bounds
-#python3.6 Sampling/SamplingDataset.py json_file
-
-# Run with manually defined sample size
-#python3.6 Sampling/SamplingDataset.py json_file sample_size
 
 python3.6 Sampling/SamplingDataset.py params.json
 
-java -Xmx6G -cp Regularization/Transductive_Classifier.jar algoritmos.GNetMineSampling params.json
+java -Xmx5G -cp Regularization/Transductive_Classifier.jar algoritmos.GNetMineSampling params.json
 
 python3.6 Sampling/Merge.py params.json
