@@ -1,12 +1,17 @@
 {
-  "labels": "business_transactions.labeled_events",
+  "dataset": "../datasets/business_transactions.edges",
+  "labels": "../labels/business_transactions.labeled_events",
+  "sampling_method": "SRW",
+  "sampling_output_dir": "../sampled_business_transactions",
+
   "mi": "0.1",
   "weight_relations": {
-	"event_temporal": "0.2",
-	"event_HL": "0.2",
-	"event_bag": "0.4",
-	"event_geographic": "0.2"
-  },
-  "input_dir": "sampled",
-  "output_dir": "models_dir"
+  	"event_temporal": "0.2",
+  	"event_HL": "0.2",
+  	"event_bag": "0.4",
+  	"event_geographic": "0.2"
+  },  
+  "regularization_output_dir": "../models/business_transactions",
+
+  "merge_output_file": "../merged_business_transactions.model"
 }

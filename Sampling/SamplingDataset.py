@@ -1,8 +1,7 @@
 import Graph_Sampling as sampling
 import networkx as nx
 import HeterogeneousNetwork as hn
-import matplotlib.pyplot as plt
-import os, sys, random, time, math
+import os, sys, random, time, math, json
 
 def readLabels(file):
 	labeledsNodes = []
@@ -40,19 +39,22 @@ def chernoffBounds(N, c, alfa = 0.95, e = 0.15):
 	else:
 		return chernoffBounds
 
+with open(sys.argv[1], "r") as read_file:
+	params = json.load(read_file)
+
 #create network
 nt = hn.HeterogeneousNetwork()
-nt.loadCSV(sys.argv[1])
+nt.loadCSV(params['dataset'])
 
 #read labels file
-labeled_nodes, num_labels = readLabels(sys.argv[2])
+labeled_nodes, num_labels = readLabels(params['labels'])
 
-output_dir = sys.argv[3]
-method = sys.argv[4]
+output_dir = params['sampling_output_dir']
+method = params['sampling_method']
 
 #size of sampling
-if len(sys.argv) > 5:
-	size = int(sys.argv[5])
+if len(sys.argv) > 2:
+	size = int(sys.argv[2])
 else:
 	size = chernoffBounds(len(nt.net), num_labels)
 
@@ -100,11 +102,12 @@ while len(reached) < len(nt.getNodes()):
 			alcancou = True
 
 	if alcancou:
-		print("Nodes:", len(sampled_subgraph.nodes),' Edges:', len(sampled_subgraph.edges()))
 		print("Nodes:", len(reached), '/', len(nt.getNodes()))
-		print()
+		print("After saimpling\t\tNodes:", len(sampled_subgraph.nodes),' Edges:', len(sampled_subgraph.edges()))
 		count += 1
 		add_labeleds(nt.net, labeled_nodes, sampled_subgraph)
+		print("After add labeleds\tNodes:", len(sampled_subgraph.nodes),' Edges:', len(sampled_subgraph.edges()))
+		print()
 		output_sample(output_dir +'/' + str(count) + '.network', sampled_subgraph)
 	else:
 		print('unreached:', node_seed)
