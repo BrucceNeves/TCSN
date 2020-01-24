@@ -1,4 +1,4 @@
-# Transductive Classification Sampled Network - TCSN
+# Transductive Classification for Sampled Networks - TCSN
 
 
 
